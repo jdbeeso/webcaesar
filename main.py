@@ -15,7 +15,7 @@
 # limitations under the License.
 #
 import webapp2
-import webcaesar
+from webcaesar import rotate_character, encrypt, alphabet_position
 import cgi
 
 def build_page(textarea_content):
@@ -42,7 +42,7 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
         message = self.request.get("message")
         rotation = int(self.request.get("rotation"))
-        encrypted_message = webcaesar.encrypt(message, rotation)
+        encrypted_message = encrypt(message, rotation)
         escaped_message = cgi.escape(encrypted_message)
         content = build_page(escaped_message)
         self.response.write(content)
